@@ -13,7 +13,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 # Carga del dataset
-file_path = r'C:\Users\Gabo\Desktop\PROYECTOFINAL\movies_dataset_procesado_reducido.csv'
+file_path = r'movies_dataset_procesado_reducido.csv'
 data = pd.read_csv(file_path)
 
 # Convertir las fechas a formato datetime para consultas precisas
