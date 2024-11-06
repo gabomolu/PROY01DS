@@ -47,12 +47,17 @@ def cantidad_filmaciones_mes(mes: str):
 # Función para contar la cantidad de filmaciones por día
 @app.get("/cantidad_filmaciones_dia/{dia}")
 def cantidad_filmaciones_dia(dia: str):
+    # Conversión del nombre del día en español a inglés
     dia_ingles = dia_a_numero(dia)
-    if dia_ingles:
-        count = data[data['release_date'].dt.day_name(locale='en') == dia_ingles].shape[0]
-        return {"mensaje": f"{count} películas fueron estrenadas en el día {dia.capitalize()}"}
-    else:
-        return {"error": "Día no válido"}
+    
+    if not dia_ingles:
+        return {"error": "Día no válido"}  # Si no se pudo convertir, retornar error
+    
+    # Filtra las filas donde el día de la semana coincide (en inglés)
+    count = data[data['release_date'].dt.day_name(locale='en').str.lower() == dia_ingles.lower()].shape[0]
+    
+    # Devuelve la respuesta con el número de películas
+    return {"mensaje": f"{count} películas fueron estrenadas en el día {dia.capitalize()}"}
 
 # Función para obtener el score de una película por título
 @app.get("/score_titulo/{titulo}")
