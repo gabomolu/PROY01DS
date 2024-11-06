@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 from fastapi import FastAPI
 import pandas as pd
-import calendar
-from threading import Thread
 import uvicorn
+from threading import Thread
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
@@ -138,4 +134,3 @@ def run_app():
 # Iniciar la API en un hilo
 thread = Thread(target=run_app)
 thread.start()
-
